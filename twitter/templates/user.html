@@ -10,7 +10,7 @@
         <h1>{{ user.first_name }}'s Profile</h1>
         <div class="tweetWrapper">
             <a href="/users/{{ user.username }}">
-                <img class="avatar" src="/{{ avatar }}">
+                <img class="avatar" src="/{{ avatar }}" height="42" width="42">
                 <span class="name">{{ user.first_name }}</span>
             </a>
                 @{{ user.username }}
@@ -34,7 +34,7 @@
         {% for tweet in tweets %}
         <div class="tweetWrapper">
             <a href="/users/{{ user.username }}">
-                <img class="avatar" src="{{ avatar }}">
+                <img class="avatar" src="/{{ avatar }}" height="42" width="42">
                 <span class="name">{{ tweet.user.first_name }}</span>
             </a>
             @{{ tweet.user.username }}

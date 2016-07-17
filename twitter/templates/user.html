@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block login %}
+    {% with user.username as username %}
+        {{ block.super }}
+    {% endwith %}
+{% endblock %}
+
+{% block content %}
+    <div class="panel left">
+        <h1>{{ user.first_name }}'s Profile</h1>
+        <div class="tweetWrapper">
+            <a href="/users/{{ user.username }}">
+                <img class="avatar" src="/{{ avatar }}">
+                <span class="name">{{ user.first_name }}</span>
+            </a>
+                @{{ user.username }}
+            <p>
+                {{ tweets.count }} Tweets
+            </p>
+         </div>
+
+    </div>
+    <div class="panel left">
+        <div class="tweetWrapper">
+            <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ profile_form.as_p }}
+            <input type="submit" value="Save">
+            </form>
+            </div>
+    </div>
+    <div class="panel left">
+        <h1>{{ user.first_name }}'s Tweets</h1>
+        {% for tweet in tweets %}
+        <div class="tweetWrapper">
+            <a href="/users/{{ user.username }}">
+                <img class="avatar" src="{{ avatar }}">
+                <span class="name">{{ tweet.user.first_name }}</span>
+            </a>
+            @{{ tweet.user.username }}
+            <span class="time">{{ tweet.creation_date|timesince }}</span>
+            <p>{{ tweet.tweet }}</p>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}

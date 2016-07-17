@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+ 
+{% block content %}
+    <div class="panel right">
+        {% if request.user.is_authenticated %}
+        <h1>Create a Tweet</h1>
+        <p>
+            <form method="post">
+            {% for field in tweet_form %}{% csrf_token %}
+            {{ field }}
+            {% endfor %}
+            <input type="hidden" value="{{ next_url }}" name="next_url">
+            <input type="submit" value="Tweet!">
+            </form>
+        </p>
+        {% else %}
+        <h1>New to Twitter?</h1>
+        <p>
+            <form method="post">{% csrf_token %}
+                {% for field in user_form %}
+                {{ field }}
+                {% endfor %}
+                <input type="submit" value="Create Account">
+                {% if estado %}
+                    <p>correo ya registrado</p>
+                {% endif %}
+            </form>
+        </p>
+        {% endif %}
+    </div>
+    <div class="panel left">
+        <h1>Tweets</h1>
+        <a href="/ascendente">Ascendente</a>
+        <a href="/decendente">Decendente</a>
+        {% for tweet in tweets %}
+        <div class="tweetWrapper">
+            <img class="avatar" src="{{ tweet.user.profile.avatar }}">
+            <span class="name">{{ tweet.user.first_name }}</span>@{{ tweet.user.username }}
+            <span class="time">{{ tweet.creation_date|timesince }}</span>
+            <p>{{ tweet.tweet }}</p>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}

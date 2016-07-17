@@ -15,7 +15,14 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
+from twitlike import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^$', 'twitlike.views.index'), # root    
+    url(r'^login$', 'twitlike.views.login_view'),
+    url(r'^logout$', 'twitlike.views.logout_view'),
+    url(r'^ascendente$', 'twitlike.views.ascendente'),
+    url(r'^decendente$', 'twitlike.views.decendente'),
+    url(r'^users/(?P<username>\w{0,30})/$', 'twitlike.views.users'),
 ]

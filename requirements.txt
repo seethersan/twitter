@@ -1,0 +1,9 @@
+Django==1.9.7
+django-filter==0.13.0
+djangorestframework==3.4.0
+docopt==0.6.2
+Markdown==2.6.6
+Pillow==3.3.0
+pipreqs==0.4.4
+requests==2.10.0
+yarg==0.1.9

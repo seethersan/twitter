@@ -29,6 +29,12 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAdminUser',),
+    'PAGE_SIZE': 10
+}
+
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -38,7 +44,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'twitlike'
+    'twitlike',
+    'rest_framework'
 ]
 
 MIDDLEWARE_CLASSES = [

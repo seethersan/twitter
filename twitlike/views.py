@@ -3,8 +3,10 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User
 from twitlike.forms import AuthenticateForm, UserProfileForm, TweetForm, UpdateProfile
 from twitlike.models import Tweet, UserProfile
+from twitlike.serializers import UserSerializer, TweetSerializer, UserProfileSerializer
 from django.contrib.auth.decorators import login_required
 from django.http import Http404
+from rest_framework import viewsets
 
 # Create your views here.
 @login_required
@@ -106,4 +108,28 @@ def users(request, username="", profile_form=None, profile=None):
 			return render(request, 'user.html', {'user': user, 'tweets': tweets, 'profile_form': profile_form, 'avatar': avatar})
 	else:
 		redirect('/')
+
+
+class UserViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows users to be viewed or edited.
+    """
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+
+class UserProfileViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows users to be viewed or edited.
+    """
+    queryset = UserProfile.objects.all()
+    serializer_class = UserProfileSerializer
+
+
+class TweetViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows groups to be viewed or edited.
+    """
+    queryset = Tweet.objects.all()
+    serializer_class = TweetSerializer
     
